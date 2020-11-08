@@ -2,7 +2,9 @@ import React from "react";
 
 const NotFoundPage = () => (
   <div>
-    <h3>Page not found</h3>
+    <h3>
+      Sorry, this page does not exist. Please use the links in navigation bar.
+    </h3>
   </div>
 );
 

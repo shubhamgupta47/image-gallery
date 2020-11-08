@@ -2,35 +2,33 @@
   box-sizing: border-box;
 }
 
-html {
-  font-size: 62.5%;
-}
-
 body {
   background: linear-gradient(141deg, #9fb8ad 0%, #1fc8db 51%, #2cb5e8 75%);
   font-family: Noto Sans, Helvetica, sans-serif;
   color: #666;
   letter-spacing: 1px;
   min-height: 100vh;
-  font-size: 1.6rem;
 }
 
 /* ----- header css starts here ----- */
 
 header {
-  text-align: center;
-  margin: 2rem 0 1rem 0;
+  margin: 1rem 0 2rem 0;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 2rem;
+  border-bottom: 1px solid;
 
   .links {
     text-transform: uppercase;
-    text-align: center;
+    text-align: left;
     font-size: 150%;
-    margin-top: 4rem;
+    padding: 0 0 1rem 1rem;
 
     .link:link,
     .link:visited {
-      padding: 0.5rem 1rem;
-      margin: 2rem;
+      padding: 0.5rem 0.5rem;
+      margin: 0.3rem;
       color: #fff;
       text-decoration: none;
       text-transform: uppercase;
@@ -46,9 +44,6 @@ header {
 }
 
 h1 {
-  text-shadow: 0 0 2rem #fefcc9, 1rem -1rem 3rem #feec85,
-    -2rem -2rem 4rem #ffae34, 2rem -4rem 5rem #ec760c, -2rem -6rem 6rem #cd4606,
-    0 -8rem 6rem #973716, 1rem -9rem 8rem #451b0e;
   display: inline-block;
   font-size: 200%;
 }
@@ -56,6 +51,7 @@ h1 {
 h1,
 h2 {
   color: #666;
+  font-weight: 600;
 }
 
 /* ----- header css ends here ----- */
@@ -113,7 +109,7 @@ button {
 
 .submit-btn {
   margin-top: 2rem;
-  font-size: 1.6rem;
+  // font-size: 1.6rem;
 }
 
 .disabled {

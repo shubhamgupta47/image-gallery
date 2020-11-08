@@ -4,6 +4,9 @@ import Header from "../components/Header";
 import HomePage from "../components/HomePage";
 import Gallery from "../components/Gallery";
 import NotFoundPage from "../components/NotFoundPage";
+import Login from "../components/Login";
+import PrivateRoute from "./PrivateRoute";
+import Register from "../components/Register";
 
 const AppRouter = () => (
   <HashRouter basename="/">
@@ -11,8 +14,10 @@ const AppRouter = () => (
       <Header />
       <div className="main-content">
         <Switch>
-          <Route component={HomePage} path="/" exact={true} />
-          <Route component={Gallery} path="/gallery" />
+          <PrivateRoute component={HomePage} path="/" exact={true} />
+          <PrivateRoute component={Gallery} path="/gallery" />
+          <Route component={Login} path="/login" />
+          <Route component={Register} path="/register" />
           <Route component={NotFoundPage} />
         </Switch>
       </div>

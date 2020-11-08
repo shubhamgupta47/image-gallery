@@ -9,8 +9,8 @@ const UploadForm = ({ errors, dispatch }) => {
   const [errorMsg, setErroMsg] = useState(null);
 
   useEffect(() => {
-    setErroMsg(errors);
-  }, [errors]);
+    setErroMsg("Upload failed. Please try again.");
+  }, [errors.uploadError]);
 
   useEffect(() => {
     setErroMsg(""); // reset error message on page load
@@ -32,8 +32,8 @@ const UploadForm = ({ errors, dispatch }) => {
 
   return (
     <React.Fragment>
-      {errorMsg && errorMsg.upload_error ? (
-        <p className="errorMsg centered-message">{errorMsg.upload_error}</p>
+      {errorMsg ? (
+        <p className="errorMsg centered-message">{errorMsg}</p>
       ) : (
         isSubmitted && (
           <p className="successMsg centered-message">

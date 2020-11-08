@@ -1,4 +1,5 @@
 import axios from "axios";
+import { getCookie } from "../helpers/auth";
 import { BASE_API_URL } from "../utils/constants";
 import { getErrors } from "./errors";
 
@@ -10,10 +11,11 @@ export const beginAddPhoto = (photo) => {
       await axios.post(`${BASE_API_URL}/photos`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${getCookie("token")}`,
         },
       });
     } catch (error) {
-      error.response && dispatch(getErrors(error.response.data));
+      error.response && dispatch(getErrors({ uploadError: error.response }));
     }
   };
 };
@@ -21,10 +23,15 @@ export const beginAddPhoto = (photo) => {
 export const startLoadPhotos = () => {
   return async (dispatch) => {
     try {
-      const photos = await axios.get(`${BASE_API_URL}/photos`);
+      const photos = await axios.get(`${BASE_API_URL}/photos`, {
+        headers: {
+          Authorization: `Bearer ${getCookie("token")}`,
+        },
+      });
       dispatch(loadPhotos(photos.data));
     } catch (error) {
-      error.response && dispatch(getErrors(error.response.data));
+      console.error(error);
+      error.response && dispatch(getErrors({ fetchingError: error.response }));
     }
   };
 };
