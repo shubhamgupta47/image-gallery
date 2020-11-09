@@ -14,6 +14,7 @@ export const beginAddPhoto = (photo) => {
           Authorization: `Bearer ${getCookie("token")}`,
         },
       });
+      dispatch(uploadPhotoSuccess());
     } catch (error) {
       error.response && dispatch(getErrors({ uploadError: error.response }));
     }
@@ -39,4 +40,8 @@ export const startLoadPhotos = () => {
 export const loadPhotos = (photos) => ({
   type: "LOAD_PHOTOS",
   photos,
+});
+
+export const uploadPhotoSuccess = () => ({
+  type: "UPLOAD_PHOTOS_SUCCESS",
 });

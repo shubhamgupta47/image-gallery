@@ -3,10 +3,10 @@ import { connect } from "react-redux";
 import { Form, Button } from "react-bootstrap";
 import { beginAddPhoto } from "../actions/photos";
 
-const UploadForm = ({ errors, dispatch }) => {
+const UploadForm = ({ errors, dispatch, uploadSuccess }) => {
   const [photo, setPhoto] = useState(null);
-  const [isSubmitted, setIsSubmitted] = useState(false);
   const [errorMsg, setErroMsg] = useState(null);
+  const [uploading, setUploading] = useState(false);
 
   useEffect(() => {
     setErroMsg("Upload failed. Please try again.");
@@ -15,6 +15,10 @@ const UploadForm = ({ errors, dispatch }) => {
   useEffect(() => {
     setErroMsg(""); // reset error message on page load
   }, []);
+
+  useEffect(() => {
+    uploadSuccess && setUploading(false);
+  }, [uploadSuccess]);
 
   const handleOnChange = (event) => {
     const file = event.target.files[0];
@@ -25,17 +29,21 @@ const UploadForm = ({ errors, dispatch }) => {
     event.preventDefault();
     if (photo) {
       setErroMsg("");
+      setUploading(true);
       dispatch(beginAddPhoto(photo));
-      setIsSubmitted(true);
     }
   };
 
   return (
     <React.Fragment>
+      {uploading && !errorMsg && (
+        <div className="alert alert-secondary">Uploading... </div>
+      )}
       {errorMsg ? (
         <p className="errorMsg centered-message">{errorMsg}</p>
       ) : (
-        isSubmitted && (
+        uploadSuccess &&
+        !uploading && (
           <p className="successMsg centered-message">
             Photo uploaded successfully.
           </p>
@@ -67,6 +75,7 @@ const UploadForm = ({ errors, dispatch }) => {
 const mapStateToProps = (state) => ({
   photos: state.photos || [],
   errors: state.errors || {},
+  uploadSuccess: state.uploadSuccess,
 });
 
 export default connect(mapStateToProps)(UploadForm);
