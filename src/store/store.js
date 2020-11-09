@@ -7,7 +7,7 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const store = createStore(
   combineReducers({
-    photos: photosReducer,
+    gallery: photosReducer,
     errors: errorsReducer,
   }),
   composeEnhancers(applyMiddleware(thunk))
